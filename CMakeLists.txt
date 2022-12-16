@@ -11,6 +11,12 @@ find_package(catkin REQUIRED COMPONENTS
 
 )
 
+install(
+  FILES publish_images.py
+  DESTINATION /image_anonymizer/ros/install/share/ros_images_publisher
+)
+
+
 catkin_package(CATKIN_DEPENDS message_runtime) # declares dependencies for packages that depend on this package.
 
 include_directories(
