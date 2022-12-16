@@ -11,7 +11,7 @@ find_package(catkin REQUIRED COMPONENTS
 
 install(
   FILES publish_images.py
-  PERMISSIONS WORLD_EXECUTE
+  PERMISSIONS OWNER_EXECUTE GROUP_EXECUTE WORLD_EXECUTE
   DESTINATION /ros/install/share/ros_images_publisher
 )
 
