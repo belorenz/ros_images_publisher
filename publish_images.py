@@ -382,7 +382,8 @@ def main(args):
 
     # -- Loop and publish.
     loop_rate = rospy.Rate(args.publish_rate)
-
+    
+    time.sleep(5)
     for i,image_path in enumerate(images_filenames):
         image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
