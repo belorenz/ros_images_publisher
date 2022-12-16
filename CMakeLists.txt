@@ -4,18 +4,16 @@ project(ros_images_publisher)
 find_package(catkin REQUIRED COMPONENTS
   roscpp
   rospy
-  
   std_msgs
   sensor_msgs
   geometry_msgs
-
 )
 
 install(
   FILES publish_images.py
+  PERMISSIONS WORLD_EXECUTE
   DESTINATION /image_anonymizer/ros/install/share/ros_images_publisher
 )
-
 
 catkin_package(CATKIN_DEPENDS message_runtime) # declares dependencies for packages that depend on this package.
 
