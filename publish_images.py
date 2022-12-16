@@ -12,7 +12,7 @@ import time
 import argparse
 import os
 import sys
-import queue
+import Queue
 import simplejson
 import glob
 from abc import ABCMeta, abstractmethod  # Abstract class.
