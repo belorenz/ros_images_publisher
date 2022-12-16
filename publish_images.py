@@ -8,7 +8,6 @@ from std_msgs.msg import Header
 
 import numpy as np
 import cv2
-import open3d
 import time
 import argparse
 import os
