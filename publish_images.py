@@ -8,9 +8,12 @@ from std_msgs.msg import Header
 
 import numpy as np
 import cv2
+import open3d
+import time
 import argparse
 import os
-import Queue
+import sys
+import queue
 import simplejson
 import glob
 from abc import ABCMeta, abstractmethod  # Abstract class.
@@ -381,23 +384,13 @@ def main(args):
     # -- Loop and publish.
     loop_rate = rospy.Rate(args.publish_rate)
 
-    num_total_imgs = len(images_filenames)
-    cnt_imgs = 0
-    ith_img = 0
+    for i,image_path in enumerate(images_filenames):
+        image = cv2.imread(image_path, cv2.IMREAD_UNCHANGED)
 
-    while not rospy.is_shutdown():
-
-        # -- Read next image.
-        if ith_img == num_total_imgs:
-            ith_img = 0
-        image = cv2.imread(images_filenames[ith_img], cv2.IMREAD_UNCHANGED)
-        cnt_imgs += 1
-        ith_img += 1
 
         # -- Publish data.
-        rospy.loginfo("=================================================")
-        rospy.loginfo("Publish {}/{}th data; {} published in total.".format(
-            ith_img, num_total_imgs, cnt_imgs))
+        rospy.loginfo("Publish {}/{}th data.".format(
+            i, len(images_filenames)))
 
         img_publisher.publish(image, FRAME_ID)
         if camera_info is not None:
@@ -409,6 +402,10 @@ def main(args):
 
         # -- Wait for publish.
         loop_rate.sleep()
+
+    rospy.loginfo("Finished publishing. Sleep 3s and exit")
+    time.sleep(3)
+    exit(0)
 
 
 if __name__ == '__main__':
